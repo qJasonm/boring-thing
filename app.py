@@ -27,7 +27,7 @@ def create_data():
 
 data = create_data()
 
-@app.route('/')
+@app.route('/Sloanslake')
 def home():
     return render_template('home.html', data=data)
 
