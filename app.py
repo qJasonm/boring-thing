@@ -36,10 +36,17 @@ def cherrycreek():
     data = create_data(city)
     return render_template('CherryCreek.html', data=data)
 
+@app.route("/Lairo'thebear")
+def Lairothebear():
+    city = 'idledale'
+    data = create_data(city)
+    return render_template('Lairothebear.html', data=data)
+
 # Scheduler to update data every 5 minutes
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=create_data, args=('edge water',), trigger="interval", seconds=300)
 scheduler.add_job(func=create_data, args=('denver',), trigger="interval", seconds=300)
+scheduler.add_job(func=create_data, args=('idledale',), trigger="interval", seconds=300)
 scheduler.start()
 
 if __name__ == "__main__":
