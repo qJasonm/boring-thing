@@ -28,7 +28,7 @@ def create_model():
     return model
 
 model = create_model()
-model.load_weights('team_project\model_weights99.h5')
+model.load_weights('model_weights99.h5')
 
 #===========================================================
 
@@ -112,13 +112,13 @@ def Lairothebear_json():
 
 # # Scheduler to update data every 5 minutes
 # scheduler = BackgroundScheduler()
-# scheduler.add_job(func=create_data, args=('edge water',), trigger="interval", seconds=300)
+# scheduler.add_job(func=create_data, args=('wheat ridge',), trigger="interval", seconds=300)
 # scheduler.add_job(func=create_data, args=('denver',), trigger="interval", seconds=300)
 # scheduler.add_job(func=create_data, args=('idledale',), trigger="interval", seconds=300)
 # scheduler.start()
 
 scheduler = BackgroundScheduler()
-cities = ['edge water', 'denver', 'idledale']
+cities = ['wheat ridge', 'denver', 'idledale']
 for city in cities:
     scheduler.add_job(func=update_and_predict, args=(city,), trigger="interval", minutes=5)
 scheduler.start()
