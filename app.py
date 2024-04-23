@@ -1,5 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask import Flask, render_template
+from flask import Flask, render_template,jsonify
 import requests
 
 app = Flask(__name__)
@@ -19,6 +19,8 @@ def create_data(city):
         "city": weather_info['name'],
         "weather": weather_info['weather'][0]['main'],
         "temperature": round(temp_converter(weather_info['main']['temp'])),
+        "min_temp": round(temp_converter(weather_info['main']['temp_min'])),
+        "max_temp": round(temp_converter(weather_info['main']['temp_max'])),
         "wind_speed": weather_info['wind']['speed'],
         "visibility": weather_info['visibility']
     }
@@ -30,17 +32,35 @@ def sloanslake():
     data = create_data(city)
     return render_template('Sloanslake.html', data=data)
 
+@app.route('/Sloanslake/json', methods=['GET'])
+def sloanslake_json():
+    city = 'wheat ridge'
+    data = create_data(city)  # Assuming create_data function is defined elsewhere
+    return jsonify(data)
+
 @app.route('/CherryCreek')
 def cherrycreek():
     city = 'denver'
     data = create_data(city)
     return render_template('CherryCreek.html', data=data)
 
+@app.route('/CherryCreek/json', methods=['GET'])
+def cherrycreek_json():
+    city = 'denver'
+    data = create_data(city)  # Assuming create_data function is defined elsewhere
+    return jsonify(data)
+
 @app.route("/Lairo'thebear")
 def Lairothebear():
     city = 'idledale'
     data = create_data(city)
     return render_template('Lairothebear.html', data=data)
+
+@app.route("/Lairo'thebear/json", methods=['GET'])
+def Lairothebear_json():
+    city = 'idledale'
+    data = create_data(city)  # Assuming create_data function is defined elsewhere
+    return jsonify(data)
 
 # Scheduler to update data every 5 minutes
 scheduler = BackgroundScheduler()
