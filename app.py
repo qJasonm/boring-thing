@@ -120,7 +120,7 @@ def Lairothebear_json():
 scheduler = BackgroundScheduler()
 cities = ['wheat ridge', 'denver', 'idledale']
 for city in cities:
-    scheduler.add_job(func=update_and_predict, args=(city,), trigger="interval", minutes=5)
+    scheduler.add_job(func=update_and_predict, args=(city,), trigger="interval", minutes=1)
 scheduler.start()
 
 if __name__ == "__main__":
